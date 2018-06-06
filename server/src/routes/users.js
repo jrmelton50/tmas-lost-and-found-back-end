@@ -7,9 +7,9 @@ import { generateHash } from '../utils/bcrypt'
 let router = Router();
 const usersTable = new Table('users');
 
-// router.get('/me', tokenMiddleware, isLoggedIn, (req, res) => {
-// 	res.json(req.user);
-// });
+router.get('/me', tokenMiddleware, isLoggedIn, (req, res) => {
+	res.json(req.user);
+});
 
 // Get all users
 router.get('/', (req, res) => {
