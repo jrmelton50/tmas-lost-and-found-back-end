@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
 	lostAnimalsTable
 		.getAll()
 		.then(results => {
-			console.log(res.json(results));
-			// res.json(results);
+			res.json(results);
 		})
 		.catch(err => {
 			console.log(err);
