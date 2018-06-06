@@ -66,14 +66,10 @@ router.post('/', (req, res) => {
 	generateHash(req.body.hash).then(hash => {
 		usersTable.insert({
 			email: req.body.email,
-			hash: hash,
-			role: 'user',
-			level: 0,
-			numberofcheckins: 0,
+			hash: hash
 		})
 			.then(results => {
-				console("User was posted to the DB");
-				res.json(results);
+				res.json(results).send(200)
 			})
 			.catch(err => {
 				console.log(err);
@@ -82,8 +78,8 @@ router.post('/', (req, res) => {
 	}).catch(err => {
 		console.log(err);
 		res.sendStatus(500);
-	});
-});
+	})
+})
 
 // updates user information
 router.put('/:id', (req, res) => {
@@ -92,13 +88,13 @@ router.put('/:id', (req, res) => {
 			req.body.hash = hash;
 			usersTable
 				.update(req.params.id, req.body)
-				.then(results => {
-					res.json(results);
-				})
-				.catch(err => {
-					console.log(err);
-					res.sendStatus(500);
-				});
+					.then(results => {
+						res.json(results);
+					})
+					.catch(err => {
+						console.log(err);
+						res.sendStatus(500);
+					});
 		})
 		.catch(err => {
 			console.log(err);
