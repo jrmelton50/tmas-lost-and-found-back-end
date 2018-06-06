@@ -8,7 +8,7 @@ import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 
 let router = Router();
 
-router.use('/auth', authRouter);
+// router.use('/auth', authRouter);
 
 // router
 // 	.route('*')
@@ -16,7 +16,7 @@ router.use('/auth', authRouter);
 // 	.put(tokenMiddleware, isLoggedIn)
 // 	.delete(tokenMiddleware, isLoggedIn);
 
-router.use('/users', usersRouter);
+// router.use('/users', usersRouter);
 router.use('/lostanimals', lostAnimalsRouter);
 router.use('/foundanimals', foundAnimalsRouter);
 // router.use('/image', imageRouter);
