@@ -13,7 +13,6 @@ router.get('/me', tokenMiddleware, isLoggedIn, (req, res) => {
 
 // Get all users
 router.get('/', (req, res) => {
-	console.log("Got here!");
 	usersTable
 		.getAll()
 		.then(results => {
