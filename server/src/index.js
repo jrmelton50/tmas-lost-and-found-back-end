@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import routes from './routes';
 import stateRouting from './middleware/routing.mw';
 import configurePassport from './config/passport';
-import http from "http";
+// import http from "http";
 
 let app = express();
 
@@ -24,6 +24,6 @@ app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
 });
 
-setInterval(function() {
-    http.get("https://tmas-lost-and-found.herokuapp.com/");
-}, 300000); 
+// setInterval(function() {
+//     http.get("https://tmas-lost-and-found.herokuapp.com/");
+// }, 300000); 
