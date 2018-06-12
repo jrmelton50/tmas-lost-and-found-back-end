@@ -37,72 +37,48 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-// Get all of the user's images
-router.get('/:userid/images', (req, res) => {
-	callProcedure('spGetImagesByUser', req.params.userid)
-		.then(results => {
-			res.json(results[0]);
-		})
-		.catch(err => {
-			console.log(err);
-			res.sendStatus(500);
-		});
-});
-
-// Get one of the user's images
-router.get('/:userid/image/:imageid', (req, res) => {
-	callProcedure('spGetOneUserImage', [req.params.userid, req.params.imageid])
-		.then(results => {
-			res.json(results[0]);
-		})
-		.catch(err => {
-			console.log(err);
-			res.sendStatus(500);
-		});
-});
-
 // creates a user
 router.post('/', (req, res) => {
-	generateHash(req.body.hash).then(hash => {
+	generateHash(req.body.hash)
+	.then(hash => {
 		usersTable.insert({
 			username: req.body.username,
 			hash: hash,
 			role: req.body.role
 		})
-			.then(results => {
-				res.json(results).send(200)
-			})
-			.catch(err => {
-				console.log(err);
-				res.sendStatus(500);
-			});
-	}).catch(err => {
+		.then(results => {
+			res.json(results).send(200)
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+	})
+	.catch(err => {
 		console.log(err);
 		res.sendStatus(500);
 	})
 })
 
 // updates user information
-router.put('/:id', (req, res) => {
-	generateHash(req.body.hash)
-		.then(hash => {
-			usersTable
-				.update(req.params.id, {
-					username: req.body.username,
-					hash: hash,
-					role: req.body.role
-				})
-					.then(results => {
-						res.json(results);
-					})
-					.catch(err => {
-						console.log(err);
-						res.sendStatus(500);
-					});
+router.put('/:id', async (req, res) => {
+	let usersHash = req.body.hash;
+	if (req.body.password) {
+		let hash = await generateHash(req.body.password);
+		usersHash = hash;
+	}
+	usersTable
+		.update(req.params.id, {
+			username: req.body.username,
+			hash: usersHash,
+			role: req.body.role,
+		})
+		.then(results => {
+			res.json(results);
 		})
 		.catch(err => {
 			console.log(err);
-			res.sendStatus(500);
+			res.sendStatus(500);	
 		});
 });
 

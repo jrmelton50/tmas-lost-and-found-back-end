@@ -10,14 +10,14 @@ let tokensTable = new Table('tokens');
 
 function configurePassport(app) {
     passport.use(new LocalStrategy({
-        usernameField: 'email',
+        usernameField: 'username',
         passwordField: 'password',
         session: false,
-    }, async (email, password, done) => {
+    }, async (username, password, done) => {
         try {
             // array destructuring. find() will return an array of results.
             // destructuring the first (and hopefully only) result into the user variable
-            let [user] = await usersTable.find({ email });
+            let [user] = await usersTable.find({ username });
             console.log(user)
             if (user && user.hash) {
                 let matches = await checkPassword(password, user.hash)
