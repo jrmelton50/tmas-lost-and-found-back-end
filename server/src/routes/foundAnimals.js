@@ -19,17 +19,39 @@ router.get('/', (req, res) => {
 		});
 });
 
-router.get('/:id', (req, res) => {
-	foundAnimalsTable
-		.getOne(req.params.id)
+// router.get('/:id', (req, res) => {
+// 	foundAnimalsTable
+// 		.getOne(req.params.id)
+// 		.then(results => {
+// 			res.json(results);
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.sendStatus(500);
+// 		});
+// });
+
+router.get('/results', (req, res) => {
+	callProcedure('spGetFoundResults', [req.body.type, req.body.sex, req.body.hairColor])
 		.then(results => {
-			res.json(results);
+			res.json(results[0]);
 		})
 		.catch(err => {
 			console.log(err);
 			res.sendStatus(500);
 		});
 });
+
+// router.get('/:userid/image/:imageid', (req, res) => {
+// 	callProcedure('spGetOneUserImage', [req.params.userid, req.params.imageid])
+// 		.then(results => {
+// 			res.json(results[0]);
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.sendStatus(500);
+// 		});
+// });
 
 router.post('/', (req, res) => {
 	foundAnimalsTable.insert(req.body)
