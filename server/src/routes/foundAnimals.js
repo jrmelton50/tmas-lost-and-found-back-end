@@ -37,7 +37,7 @@ router.get('/results/:type/:sex', (req, res) => {
 	// callProcedure('spGetFoundResults', [req.body.type, req.body.sex, req.body.hairColor])
 	callProcedure('spGetFoundResults', [req.params.type, req.params.sex])
 		.then(results => {
-			res.json(results[0]);
+			res.json(results);
 		})
 		.catch(err => {
 			console.log(err);
