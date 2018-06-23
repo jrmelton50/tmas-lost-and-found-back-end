@@ -32,6 +32,8 @@ router.get('/', (req, res) => {
 // });
 
 router.get('/results/:type/:sex', (req, res) => {
+	console.log("req.params.type = ", req.params.type);
+	console.log("req.params.sex = ", req.params.sex);
 	// callProcedure('spGetFoundResults', [req.body.type, req.body.sex, req.body.hairColor])
 	callProcedure('spGetFoundResults', [req.params.type, req.params.sex])
 		.then(results => {
