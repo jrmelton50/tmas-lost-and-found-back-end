@@ -31,9 +31,9 @@ router.get('/', (req, res) => {
 // 		});
 // });
 
-router.get('/results', (req, res) => {
+router.get('/results/:type/:sex', (req, res) => {
 	// callProcedure('spGetFoundResults', [req.body.type, req.body.sex, req.body.hairColor])
-	callProcedure('spGetFoundResults', [req.body.type, req.body.sex])
+	callProcedure('spGetFoundResults', [req.params.type, req.params.sex])
 		.then(results => {
 			res.json(results[0]);
 		})
